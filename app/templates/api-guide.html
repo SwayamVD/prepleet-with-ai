@@ -6,7 +6,7 @@
     <title>API Guide</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=SUSE+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         :root {
             --primary-color: #4361ee;
@@ -119,6 +119,7 @@
             color: var(--text-color);
         }
         
+        
         pre {
             background-color: #f5f5f5;
             border: 1px solid var(--border-color);
@@ -138,6 +139,13 @@
 <body>
 <div class="container py-4">
     <h1 class="text-center">PrepLeet API Guide</h1>
+    <div class="mt-4 mb-3">
+        PrepLeet APIs provide company-specific coding questions, detailed problem information, and the ability to submit your code for AI analysis. You can also receive AI-generated hints if you get stuck on a problem.
+
+        <br>PrepLeet APIs follow the REST architecture and return standard HTTP response codes, with all responses formatted in JSON.
+
+        <br>This API-based module was developed to integrate with our main project, <strong>InterviewAce</strong> – Intelligent Interview Preparation Platform, which is a collaborative effort by a team of five developers.
+    </div>
 
     <div class="accordion" id="apiAccordion">
 
@@ -153,18 +161,88 @@
                     <div class="endpoint">
                         <div>
                             <span class="method get">GET</span>
-                            <span class="path">/questions/&lt;company&gt;</span>
-                        </div>
-                        <div class="description">Returns all questions for a given company.</div>
-                    </div>
-                    
-                    <div class="endpoint">
-                        <div>
-                            <span class="method get">GET</span>
                             <span class="path">/getcompanylist</span>
                         </div>
                         <div class="description">Returns a list of all company names.</div>
+                                                
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Response
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Company List</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <pre>[
+    "Accenture",
+    "Capgemini",
+    "Cognizant",
+    "DXZ Technology",
+    "HCL",
+    "Ibm",
+    "Infosys",
+    "Josh Technology",
+    "Nvidia",
+    "Tcs",
+    "Tech Mahindra",
+    "Wipro"
+]</pre>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
                     </div>
+                    <hr>
+                    <div class="endpoint">
+                        <div>
+                            <span class="method get">GET</span>
+                            <span class="path">/questions/&lt;company&gt;</span>
+                        </div>
+                        <div class="description">Returns all questions for a given company.</div>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#questionlistModal">
+  Response
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="questionlistModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Question List</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+                        <pre>[
+    {
+        "Company": "HCL",
+        "Difficulty": "EASY",
+        "Link": "https://leetcode.com/problems/valid-parentheses",
+        "Slug": "valid-parentheses",
+        "Title": "Valid Parentheses"
+    },
+    {
+        "Company": "HCL",
+        "Difficulty": "MEDIUM",
+        "Link": "https://leetcode.com/problems/longest-substring-without-repeating-characters",
+        "Slug": "longest-substring-without-repeating-characters",
+        "Title": "Longest Substring Without Repeating Characters"
+    }
+]</pre>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+                    </div>
+                    
+
                 </div>
             </div>
         </div>
@@ -184,22 +262,220 @@
                             <span class="path">/prepleet/problem/&lt;slug&gt;</span>
                         </div>
                         <div class="description">Fetch details of a LeetCode problem using its slug.</div>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#problemdetailModal">
+  Response
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="problemdetailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Problem Detail</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+                        <pre>{
+    "codeSnippets": [
+        {
+            "code": "class Solution {\npublic:\n    vector<int> twoSum(vector<int>& nums, int target) {\n        \n    }\n};",
+            "lang": "C++",
+            "langSlug": "cpp"
+        },
+        {
+            "code": "class Solution {\n    public int[] twoSum(int[] nums, int target) {\n        \n    }\n}",
+            "lang": "Java",
+            "langSlug": "java"
+        },
+        {
+            "code": "class Solution:\n    def twoSum(self, nums: List[int], target: int) -> List[int]:\n        ",
+            "lang": "Python3",
+            "langSlug": "python3"
+        }
+    ],
+    "companyTagStats": null,
+    "content": "problem description, html inbuilt",
+    "difficulty": "Easy",
+    "exampleTestcaseList": [
+        "[2,7,11,15]\n9",
+        "[3,2,4]\n6",
+        "[3,3]\n6"
+    ],
+    "hints": [
+        "A really brute force way would be to search for all possible pairs of numbers but that would be too slow. Again, it's best to try out brute force solutions just for completeness. It is from these brute force solutions that you can come up with optimizations.",
+        "So, if we fix one of the numbers, say <code>x</code>, we have to scan the entire array to find the next number <code>y</code> which is <code>value - x</code> where value is the input parameter. Can we change our array somehow so that this search becomes faster?",
+        "The second train of thought is, without changing the array, can we use additional space somehow? Like maybe a hash map to speed up the search?"
+    ],
+    "questionId": "1",
+    "similarQuestionList": [
+        {
+            "difficulty": "Medium",
+            "title": "3Sum",
+            "titleSlug": "3sum"
+        },
+        {
+            "difficulty": "Medium",
+            "title": "4Sum",
+            "titleSlug": "4sum"
+        }
+    ],
+    "title": "Two Sum",
+    "topicTags": [
+        {
+            "name": "Array",
+            "slug": "array"
+        },
+        {
+            "name": "Hash Table",
+            "slug": "hash-table"
+        }
+    ]
+}</pre>
+      </div>
+
+    </div>
+  </div>
+</div>
                     </div>
-                    
+                    <hr>
                     <div class="endpoint">
                         <div>
                             <span class="method get">GET</span>
                             <span class="path">/prepleet/set/&lt;search&gt;</span>
                         </div>
                         <div class="description">Fetch a set of problems based on a search term.</div>
+                        <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#setModal">
+  Response
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="setModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Search Quetions</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+<pre>[
+    {
+        "__typename": "ProblemSetQuestionNode",
+        "acRate": 0.45242526130713506,
+        "contestPoint": null,
+        "difficulty": "EASY",
+        "frequency": null,
+        "id": 717,
+        "isInMyFavorites": false,
+        "paidOnly": false,
+        "questionFrontendId": "717",
+        "status": "TO_DO",
+        "title": "1-bit and 2-bit Characters",
+        "titleSlug": "1-bit-and-2-bit-characters",
+        "topicTags": [
+            {
+                "__typename": "CommonTagNode",
+                "name": "Array",
+                "slug": "array"
+            }
+        ]
+    },
+    {
+        "__typename": "ProblemSetQuestionNode",
+        "acRate": 0.6445738169876101,
+        "contestPoint": null,
+        "difficulty": "MEDIUM",
+        "frequency": null,
+        "id": 2644,
+        "isInMyFavorites": false,
+        "paidOnly": true,
+        "questionFrontendId": "2505",
+        "status": "TO_DO",
+        "title": "Bitwise OR of All Subsequence Sums",
+        "titleSlug": "bitwise-or-of-all-subsequence-sums",
+        "topicTags": [
+            {
+                "__typename": "CommonTagNode",
+                "name": "Array",
+                "slug": "array"
+            }
+        ]
+    }
+]</pre>
+      </div>
+    </div>
+  </div>
+</div>
                     </div>
-                    
+                    <hr>
                     <div class="endpoint">
                         <div>
                             <span class="method get">GET</span>
                             <span class="path">/prepleet/fav/&lt;name&gt;</span>
                         </div>
                         <div class="description">Fetch a favorite problem set by name.</div>
+<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#favModal">
+  Response
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="favModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Favorite Set Quetions</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+<pre>[
+    {
+        "__typename": "ProblemSetQuestionNode",
+        "acRate": 0.45242526130713506,
+        "contestPoint": null,
+        "difficulty": "EASY",
+        "frequency": null,
+        "id": 717,
+        "isInMyFavorites": false,
+        "paidOnly": false,
+        "questionFrontendId": "717",
+        "status": "TO_DO",
+        "title": "1-bit and 2-bit Characters",
+        "titleSlug": "1-bit-and-2-bit-characters",
+        "topicTags": [
+            {
+                "__typename": "CommonTagNode",
+                "name": "Array",
+                "slug": "array"
+            }
+        ]
+    },
+    {
+        "__typename": "ProblemSetQuestionNode",
+        "acRate": 0.6445738169876101,
+        "contestPoint": null,
+        "difficulty": "MEDIUM",
+        "frequency": null,
+        "id": 2644,
+        "isInMyFavorites": false,
+        "paidOnly": true,
+        "questionFrontendId": "2505",
+        "status": "TO_DO",
+        "title": "Bitwise OR of All Subsequence Sums",
+        "titleSlug": "bitwise-or-of-all-subsequence-sums",
+        "topicTags": [
+            {
+                "__typename": "CommonTagNode",
+                "name": "Array",
+                "slug": "array"
+            }
+        ]
+    }
+]</pre>
+      </div>
+    </div>
+  </div>
+</div>
                     </div>
                 </div>
             </div>
@@ -220,30 +496,115 @@
                             <span class="path">/analyze</span>
                         </div>
                         <div class="description">Analyze code and return analysis results.</div>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#analyzeheadModal">
+  Header
+</button>
+<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#analyzeresponseModal">
+  Response
+</button>
+<!-- Modal -->
+<div class="modal fade" id="analyzeheadModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Header</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
                         <pre>{
-    "code": "your code here",
-    "language": "python3",
-    "idtitle": "problem title"
+  "code": "from typing import List\n\nclass Solution:\n    def twoSum(self, nums: List[int], target: int) -> List[int]:\n        seen = {}  # dictionary to store value:index\n        for i, num in enumerate(nums):\n            complement = target - num\n            if complement in seen:\n                return [seen[complement], i]\n            seen[num] = i\n        return []\n",
+  "lang": "Python3",
+  "idtitle": "two-sum"
 }</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="analyzeresponseModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Response</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+                        <pre>{
+    "explanation": "The code iterates through the input list `nums` once. For each number, it calculates the complement needed to reach the target. It checks if the complement exists in the `seen` dictionary. If it does, it means the pair is found, and the indices are returned. Otherwise, the current number and its index are added to the `seen` dictionary. If no pair is found after iterating through the entire list, an empty list is returned.",
+    "optimization_suggestions": [
+        "The code is already quite efficient.  Further optimization might involve specialized data structures for specific input distributions but would likely not yield significant improvements in the general case."
+    ],
+    "refactored_code": "",
+    "space_complexity": "O(n)",
+    "time_complexity": {
+        "average": "O(n)",
+        "best": "O(n)",
+        "worst": "O(n)"
+    },
+    "verify": "Correct Code"
+}</pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+
                     </div>
-                    
+                    <hr>
                     <div class="endpoint">
                         <div>
                             <span class="method post">POST</span>
                             <span class="path">/gotstuck</span>
                         </div>
                         <div class="description">Generate hints for code.</div>
+<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#analyzehead2Modal">
+  Header
+</button>
+<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#analyzeresponse2Modal">
+  Response
+</button>
+<!-- Modal -->
+<div class="modal fade" id="analyzehead2Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Header</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
                         <pre>{
-    "code": "your code here",
-    "language": "python3",
-    "idtitle": "problem title"
+  "code": "from typing import List\n\nclass Solution:\n    def twoSum(self, nums: List[int], target: int) -> List[int]:\n        seen = {}  # dictionary to store value:index\n        for i, num in enumerate(nums):\n            complement = target - num\n            if complement in seen:\n                return [seen[complement], i]\n            seen[num] = i\n        return []\n",
+  "lang": "Python3",
+  "idtitle": "two-sum"
 }</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="analyzeresponse2Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Response</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+                        <pre>{
+    "analysis": "The code attempts to use a dictionary to store seen numbers and their indices.  The issue lies in how it handles the case where the target can be formed by using the same number twice (e.g., target = 6, nums = [3,3]). In such a case, the code will incorrectly return the index of the first 3 twice instead of the indices of both 3s.",
+    "keyconcepts": "Consider using a different data structure or algorithm that allows efficient lookups while ensuring you correctly handle duplicates.  For example, you could iterate through the array and for each number check if the complement exists in the remaining part of the array."
+}</pre>
+      </div>
+    </div>
+  </div>
+</div>
                     </div>
                 </div>
             </div>
         </div>
 
     </div>
+
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
