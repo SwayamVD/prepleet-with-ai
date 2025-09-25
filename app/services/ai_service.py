@@ -1,5 +1,5 @@
 import google.generativeai as genai
-genai.configure(api_key="ihopeyoufindyourapi")
+genai.configure(api_key="AIzaSyBPurTgr1YTZgAsNNvjgC2G_ZgirEwS4OQ")
 import re,json
 
 

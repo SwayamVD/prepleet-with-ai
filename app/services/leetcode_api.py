@@ -7,6 +7,7 @@ DEFAULT_HEADERS = {
 }
 
 # Get details for one problem by slug
+# detailed information about a specific question
 def get_problem_details(slug):
     headers = DEFAULT_HEADERS.copy()
     headers["Referer"] = f"https://leetcode.com/problems/{slug}/"
@@ -19,11 +20,6 @@ def get_problem_details(slug):
         difficulty
         content
         hints
-        solution {
-            id
-            content
-            canSeeDetail
-        }
         exampleTestcaseList
         topicTags {
           name
@@ -36,6 +32,7 @@ def get_problem_details(slug):
           title
         }
         codeSnippets {
+          code
           lang
           langSlug
         }
@@ -51,12 +48,19 @@ def get_problem_details(slug):
 
     resp = requests.post(URL, headers=headers, json=payload)
     data = resp.json()
+
+    # question = data["data"]["question"]
+    # allowed_language = {"cpp","java","python3"}
+    # question["codeSnippets"] = [
+    #     c for c in question.get("codeSnippets", []) if c["langSlug"] in allowed_language
+    # ]
     if resp.status_code != 200 or "errors" in data:
         return resp.status_code;
     return data["data"]["question"]
 
 
 # Generic problemset query
+# Pure Search Based questions list
 PROBLEMSET_QUERY = """
 query problemsetQuestionListV2(
   $filters: QuestionFilterInput,
@@ -115,6 +119,7 @@ def get_problem_set(category=None, search=None, limit=20, skip=0):
     return data["data"]["problemsetQuestionListV2"]["questions"]
 
 # Generic Favorite Problem Set
+# Data Structure wise questions
 FAVORITE_SET = """
     query favoriteQuestionList(
     $favoriteSlug: String!, 
